@@ -1,0 +1,150 @@
+<!-- templates/home.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+
+  body {
+    background-color: aliceblue;
+  }
+
+  .horizontal-line {
+    width: 100%;
+    height: 1px;
+    background-color: rgb(200, 200, 200);
+    margin: 1em 0;
+  }
+
+  .spacer {
+    height: 1em;
+  }
+
+  #main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+  }
+
+  #page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3.5em;
+    padding: 2em;
+    width: auto;
+    height: auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  #description-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2em;
+  }
+
+  #result-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    padding: 2em;
+    background-color: rgb(233, 233, 233);
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  #result-container p {
+    font-size: 1.25em;
+    margin-bottom: 0.5em;
+  }
+
+  #prediction-container {
+    width: 100%;
+    padding: 0.5em;
+    background-color: rgb(20, 143, 20);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: 0.3s;
+  }
+
+  #prediction-container-attack {
+    width: 100%;
+    padding: 0.5em;
+    background-color: rgb(145, 25, 25);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: 0.3s;
+  }
+
+  #prediction-container h3 {
+    margin-top: 0.5em;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  form * {
+    margin: 0.5em 0;
+    font-size: 1.25em;
+  }
+
+  h1 {
+    font-size: 2.25em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+    color: rgb(114, 114, 114);
+  }
+</style>
+
+<div id="main-container">
+  <div id="page-container">
+    <div id="description-container">
+      <h1 id="title">Network Cyber Attack Detection Model</h1>
+      <div class="horizontal-line"></div>
+      <h2 id="attributions">Created by Mashed</h2>
+    </div>
+    <div id="result-container">
+      <h3>Submitted Information</h3>
+      <div class="horizontal-line"></div>
+      <p>Duration: {{duration}}</p>
+      <p>Flow Duration: {{flow_duration}}</p>
+      <p>Weight: {{weight}}</p>
+      <p>Variance: {{variance}}</p>
+      <p>RST Count: {{rst_count}}</p>
+      <p>URG Count: {{urg_count}}</p>
+      <div class="spacer"></div>
+      <div id="prediction-container{% if prediction == 1 %}-attack{% endif %}">
+        <h3>Prediction</h3>
+        <div class="horizontal-line"></div>
+        {% if prediction == 1 %}
+        <p><strong>Attack Detected!</strong></p>
+        {% else %}
+        <p><strong>Normal Traffic Detected.</strong></p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
